@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSeven"
         android:layout_toLeftOf="@+id/btnNine"
-        android:text="@string/Eight" />
+        android:text="@string/Eight"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnNine"
@@ -20,7 +21,8 @@
         android:layout_alignBaseline="@+id/btnEight"
         android:layout_alignBottom="@+id/btnEight"
         android:layout_toRightOf="@+id/btnTwo"
-        android:text="@string/Nine" />
+        android:text="@string/Nine"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnDivide"
@@ -28,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnMultiply"
         android:layout_toLeftOf="@+id/btnC"
-        android:text="@string/Divide" />
+        android:text="@string/Divide"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnPlus"
@@ -36,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSubtract"
         android:layout_toRightOf="@+id/btnThree"
-        android:text="@string/Plus" />
+        android:text="@string/Plus"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnPlusMinus"
@@ -44,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btnPlus"
-        android:text="@string/PlusOrMinus" />
+        android:text="@string/PlusOrMinus"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnDot"
@@ -52,7 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/btnZero"
-        android:text="@string/dot" />
+        android:text="@string/dot"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnZero"
@@ -60,7 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btnTwo"
-        android:text="@string/Zero" />
+        android:text="@string/Zero"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnThree"
@@ -68,7 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnPlusMinus"
         android:layout_toLeftOf="@+id/btnMultiply"
-        android:text="@string/Three" />
+        android:text="@string/Three"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnTwo"
@@ -76,7 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnPlusMinus"
         android:layout_toLeftOf="@+id/btnPlusMinus"
-        android:text="@string/Two" />
+        android:text="@string/Two"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnSubtract"
@@ -84,7 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnPlusMinus"
         android:layout_toLeftOf="@+id/btnC"
-        android:text="@string/Subtract" />
+        android:text="@string/Subtract"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnFour"
@@ -92,7 +102,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnTwo"
         android:layout_toLeftOf="@+id/btnTwo"
-        android:text="@string/Four" />
+        android:text="@string/Four"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnSeven"
@@ -101,7 +112,8 @@
         android:layout_alignBaseline="@+id/btnDivide"
         android:layout_alignBottom="@+id/btnDivide"
         android:layout_alignParentLeft="true"
-        android:text="@string/Seven" />
+        android:text="@string/Seven"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnFive"
@@ -109,7 +121,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnFour"
         android:layout_toRightOf="@+id/btnFour"
-        android:text="@string/Five" />
+        android:text="@string/Five"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnMultiply"
@@ -117,7 +130,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnFive"
         android:layout_toLeftOf="@+id/btnC"
-        android:text="@string/Multiply" />
+        android:text="@string/Multiply"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnSix"
@@ -125,7 +139,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnMultiply"
         android:layout_toLeftOf="@+id/btnDivide"
-        android:text="@string/Six" />
+        android:text="@string/Six"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnOne"
@@ -133,7 +148,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/btnEight"
-        android:text="@string/One" />
+        android:text="@string/One"
+        android:onClick="editExpression" />
 
     <EditText
         android:id="@+id/calcScreen"
@@ -153,7 +169,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnSeven"
         android:layout_alignParentLeft="true"
-        android:text="@string/openBracket" />
+        android:text="@string/openBracket"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnC"
@@ -161,7 +178,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnDivide"
         android:layout_alignParentRight="true"
-        android:text="@string/C" />
+        android:text="@string/C"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnExponent"
@@ -169,7 +187,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnMultiply"
         android:layout_toRightOf="@+id/btnDivide"
-        android:text="@string/Exponent" />
+        android:text="@string/Exponent"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnPercentage"
@@ -177,7 +196,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnSubtract"
         android:layout_toRightOf="@+id/btnSubtract"
-        android:text="@string/Percentage" />
+        android:text="@string/Percentage"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnOneByX"
@@ -185,7 +205,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnPlus"
         android:layout_toRightOf="@+id/btnPlus"
-        android:text="@string/OneDivideX" />
+        android:text="@string/OneDivideX"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnEqualTo"
@@ -193,7 +214,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/EqualTo" />
+        android:text="@string/EqualTo"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/btnClose"
@@ -201,7 +223,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnFive"
         android:layout_toLeftOf="@+id/btnSix"
-        android:text="@string/closeBracket" />
+        android:text="@string/closeBracket"
+        android:onClick="editExpression" />
 
     <Button
         android:id="@+id/BtnBackspace"
@@ -210,6 +233,7 @@
         android:layout_above="@+id/btnFive"
         android:layout_alignRight="@+id/btnDivide"
         android:layout_toRightOf="@+id/btnFive"
-        android:text="@string/Backspace" />
+        android:text="@string/Backspace"
+        android:onClick="editExpression" />
 
 </RelativeLayout>

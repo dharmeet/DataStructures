@@ -7,37 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+
 import android.widget.Button;
 import android.widget.EditText;
 
-public class SimulationExperiment2 extends Activity implements OnClickListener {
+public class SimulationExperiment2 extends Activity {
 
 		private EditText Scr;
-//		private float NumberBf; //number before pressing operator
-//		private float Operand1;
-//		private float Operand2;
-//		private String Operator;
-//		private String Opr;
-		Button btnAdd;
-		Button btnSub;
-		Button btnMul;
-		Button btnDiv;
-		Button btnC;
-		Button btnEq;
-		Button btnOpen;
-		Button btnClose;
-		Button btnPower;
-		Button btnPercentage;
-		Button btnOneByX;
-		Button btnPlusMinus;
-		Button btnBackspace;
-		Button btnZero; Button btnOne; Button btnTwo; Button btnThree; 
-		Button btnFour; Button btnFive;
-		Button btnSix; Button btnSeven;
-		Button btnEight; Button btnNine;
-		String number="";
-		String numb;
+		//String number="";
+	//	String numb;
 		Stack<Character> ops = new Stack<Character>();
 		
 		Stack<Float> values = new Stack<Float>();
@@ -49,59 +27,10 @@ public class SimulationExperiment2 extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_simulation_experiment2);
 		Scr = (EditText) findViewById(R.id.calcScreen);
 		Scr.setEnabled(false);
-		
-		btnAdd = (Button) findViewById(R.id.btnPlus);
-		btnSub = (Button) findViewById(R.id.btnSubtract);
-		btnMul = (Button) findViewById(R.id.btnMultiply);
-		btnDiv = (Button) findViewById(R.id.btnDivide);
-		btnEq = (Button) findViewById(R.id.btnEqualTo);
-		btnC = (Button) findViewById(R.id.btnC);
-		btnOneByX = (Button) findViewById(R.id.btnOneByX);
-		btnOpen = (Button) findViewById(R.id.btnOpen);
-		btnClose = (Button) findViewById(R.id.btnClose);
-		btnPower = (Button) findViewById(R.id.btnExponent);
-		btnPercentage = (Button) findViewById(R.id.btnPercentage);
-		btnPlusMinus = (Button) findViewById(R.id.btnPlusMinus);
-		btnBackspace = (Button) findViewById(R.id.BtnBackspace);
-		btnZero = (Button) findViewById(R.id.btnZero);
-		btnOne = (Button) findViewById(R.id.btnOne);
-		btnTwo = (Button) findViewById(R.id.btnTwo);
-		btnThree = (Button) findViewById(R.id.btnThree);
-		btnFour = (Button) findViewById(R.id.btnFour);
-		btnFive = (Button) findViewById(R.id.btnFive);
-		btnSix = (Button) findViewById(R.id.btnSix);
-		btnSeven = (Button) findViewById(R.id.btnSeven);
-		btnEight = (Button) findViewById(R.id.btnEight);
-		btnNine = (Button) findViewById(R.id.btnNine);
-		
-		
-		btnAdd.setOnClickListener(this);
-		btnSub.setOnClickListener(this);
-		btnMul.setOnClickListener(this);
-		btnDiv.setOnClickListener(this);
-		btnC.setOnClickListener(this);
-		btnEq.setOnClickListener(this);
-		btnOneByX.setOnClickListener(this);
-		btnOpen.setOnClickListener(this);
-		btnClose.setOnClickListener(this);
-		btnPower.setOnClickListener(this);
-		btnPercentage.setOnClickListener(this);
-		btnPlusMinus.setOnClickListener(this);
-		btnBackspace.setOnClickListener(this);
-		btnZero.setOnClickListener(this);
-		btnOne.setOnClickListener(this);
-		btnTwo.setOnClickListener(this);
-		btnThree.setOnClickListener(this);
-		btnFour.setOnClickListener(this);
-		btnFive.setOnClickListener(this);
-		btnSix.setOnClickListener(this);
-		btnSeven.setOnClickListener(this);
-		btnEight.setOnClickListener(this);
-		btnNine.setOnClickListener(this);
-		
+			
 	}
 	
-	public void mResult(){
+	public void EvaluateExpression(){
 		String Expression = Scr.getText().toString();
 		float result=0;
 		char[] tokens = Expression.toCharArray();
@@ -214,7 +143,7 @@ public class SimulationExperiment2 extends Activity implements OnClickListener {
     return 0;
 }
 
-	public void onClick(View v){
+	public void editExpression(View v){
 			Log.i("Click", "Click");
 			switch(v.getId()){
 			case R.id.btnC:	 //clear screen
@@ -242,11 +171,11 @@ public class SimulationExperiment2 extends Activity implements OnClickListener {
 				break;
 				
 			case R.id.btnEqualTo:
-				mResult();
+				EvaluateExpression();
 				break;
 			
 			default:
-				numb = ((Button) v).getText().toString();
+				String numb = ((Button) v).getText().toString();
 				String ScrCurrent = Scr.getText().toString();
 				ScrCurrent += numb;
 				Scr.setText(ScrCurrent);
