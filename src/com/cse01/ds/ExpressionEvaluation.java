@@ -6,17 +6,94 @@ import android.util.Log;
 
 public class ExpressionEvaluation {
 	
-	Stack<Float> values = new Stack<Float>();
+	static Stack<Float> values = new Stack<Float>();
 	
-	Stack<Character> ops = new Stack<Character>();
+	static Stack<Character> ops = new Stack<Character>();
 	
-	public float EvaluateExpression(String expression){
+	public static boolean isOperator(char op)
+	{
+		if(op=='+' || op=='-' || op=='*' || op=='/' || op=='^' ||
+				op=='%')
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean isDigit(char digit)
+	{
+		if(digit>='0' && digit<='9')
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean ValidateExpression(String expression) {
+		char[] tokens = expression.toCharArray();
+		int len = tokens.length;
+		int mBracketCount=0;
+		for(int i=0; i<len; i++)
+		{
+			Log.i(Character.toString(tokens[i]), Character.toString(tokens[i]));
+			if(isOperator(tokens[i]))
+			{
+				if(i>=len)
+					return false;
+				else if(!(tokens[i+1]=='(' || isDigit(tokens[i+1])))
+				{
+					return false;
+				}
+			}
+			else if(isDigit(tokens[i]))
+			{
+				if(i<len-1)
+				{
+					if(!(isDigit(tokens[i+1]) || isOperator(tokens[i+1]) 
+							|| tokens[i+1]=='.' || tokens[i+1]==')')) {
+						return false;
+					}
+				}
+			}
+			else if(tokens[i]=='.')
+			{
+				if((i==len-1) && !(isDigit(tokens[i+1]))){
+					return false;
+				}
+				else if(i<len-1)
+				{
+					if(!(isDigit(tokens[i+1]) || isOperator(tokens[i+1]) 
+							|| tokens[i+1]==')')){
+						return false;
+					}
+				}
+			}
+			else if(tokens[i]=='(')
+			{
+				if(i==len-1)
+					return false;
+				else if(!(isDigit(tokens[i+1]) || tokens[i+1]=='.'))
+					return false;
+				mBracketCount++;
+			}
+			else if(tokens[i]==')')
+			{
+				mBracketCount--;
+			}
+			
+		}
+		if(mBracketCount!=0)
+			return false;
+		else
+			return true;
+	}
+	
+	public static float CalculateExpression(String expression){
 		//String Expression = Scr.getText().toString();
-		float result=0;
+		
 		char[] tokens = expression.toCharArray();
 		int flag=0;
 		int count=0;
-		for (int i = 0; i < tokens.length; i++)
+		int len = tokens.length;
+		for (int i = 0; i < len; i++)
         {
 			Log.i(Character.toString(tokens[i]), Character.toString(tokens[i]));
              // Current token is a whitespace, skip it
@@ -28,7 +105,7 @@ public class ExpressionEvaluation {
             {
                 StringBuffer sbuf = new StringBuffer();
                 // There may be more than one digits in number
-                while (i < tokens.length && ((tokens[i] >= '0' && tokens[i] <= '9')||tokens[i]=='.'))
+                while (i < len && ((tokens[i] >= '0' && tokens[i] <= '9')||tokens[i]=='.'))
                     sbuf.append(tokens[i++]);
                 i--;
                 values.push(Float.parseFloat(sbuf.toString()));
@@ -55,9 +132,7 @@ public class ExpressionEvaluation {
             }
  
             // Current token is an operator.
-            else if (tokens[i] == '+' || tokens[i] == '-' ||
-                     tokens[i] == '*' || tokens[i] == '/' || 
-                     tokens[i] == '%' || tokens[i] == '^')
+            else if (isOperator(tokens[i]))
             {
                 // While top of 'ops' has same or greater precedence to current
                 // token, which is an operator. Apply operator on top of 'ops'
@@ -83,10 +158,8 @@ public class ExpressionEvaluation {
             values.push(applyOp(ops.pop(), values.pop(), values.pop()));
        
         // Top of 'values' contains result, return it
-        result=values.pop();
-    //	Scr.setText(String.valueOf(result));
-        return result;
-		
+        return values.pop();
+        	
 	}
 	public static boolean hasPrecedence(char op1, char op2)
 	{
@@ -119,10 +192,9 @@ public class ExpressionEvaluation {
 			return a%b;
 		case '^':
 			return (float)Math.pow((double)a, (double)b);
-    }
-    return 0;
+		}
+		return 0;
 
 	
-}
-
+	}
 }
