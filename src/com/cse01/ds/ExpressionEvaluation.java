@@ -6,9 +6,9 @@ import android.util.Log;
 
 public class ExpressionEvaluation {
 	
-	static Stack<Float> values = new Stack<Float>();
+	static Stack<Float> mValues = new Stack<Float>();
 	
-	static Stack<Character> ops = new Stack<Character>();
+	static Stack<Character> mOps = new Stack<Character>();
 	
 	public static boolean isOperator(char op)
 	{
@@ -108,23 +108,23 @@ public class ExpressionEvaluation {
                 while (i < len && ((tokens[i] >= '0' && tokens[i] <= '9')||tokens[i]=='.'))
                     sbuf.append(tokens[i++]);
                 i--;
-                values.push(Float.parseFloat(sbuf.toString()));
+                mValues.push(Float.parseFloat(sbuf.toString()));
             }
  
-            // Current token is an opening brace, push it to 'ops'
+            // Current token is an opening brace, push it to 'mOps'
             else if (tokens[i] == '(')
-                ops.push(tokens[i]);
+                mOps.push(tokens[i]);
             
          // Closing brace encountered, solve entire brace
             else if (tokens[i] == ')')
             {
-                while (ops.peek() != '(')
-                  values.push(applyOp(ops.pop(), values.pop(), values.pop()));
-                ops.pop();
+                while (mOps.peek() != '(')
+                  mValues.push(applyOp(mOps.pop(), mValues.pop(), mValues.pop()));
+                mOps.pop();
                 if(flag==1 && count>0)
                 {
-                	float a = values.pop();
-                	values.push(-1*a);
+                	float a = mValues.pop();
+                	mValues.push(-1*a);
                 	count--;
                 	if(count==0)
                 		flag=0;
@@ -134,9 +134,9 @@ public class ExpressionEvaluation {
             // Current token is an operator.
             else if (isOperator(tokens[i]))
             {
-                // While top of 'ops' has same or greater precedence to current
-                // token, which is an operator. Apply operator on top of 'ops'
-                // to top two elements in values stack
+                // While top of 'mOps' has same or greater precedence to current
+                // token, which is an operator. Apply operator on top of 'mOps'
+                // to top two elements in mValues stack
             	if(tokens[i]=='-' && tokens[i+1]=='(')
             	{
             		i++;
@@ -144,21 +144,21 @@ public class ExpressionEvaluation {
             		flag = 1;
             	}
             	else {
-            		while (!ops.empty() && hasPrecedence(tokens[i], ops.peek()))
-            			values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+            		while (!mOps.empty() && hasPrecedence(tokens[i], mOps.peek()))
+            			mValues.push(applyOp(mOps.pop(), mValues.pop(), mValues.pop()));
             		
             	}
-                // Push current token to 'ops'.
-                ops.push(tokens[i]);
+                // Push current token to 'mOps'.
+                mOps.push(tokens[i]);
             }
         }
 		// Entire expression has been parsed at this point, apply remaining
-        // ops to remaining values
-        while (!ops.empty())
-            values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+        // mOps to remaining mValues
+        while (!mOps.empty())
+            mValues.push(applyOp(mOps.pop(), mValues.pop(), mValues.pop()));
        
-        // Top of 'values' contains result, return it
-        return values.pop();
+        // Top of 'mValues' contains result, return it
+        return mValues.pop();
         	
 	}
 	public static boolean hasPrecedence(char op1, char op2)
@@ -185,9 +185,11 @@ public class ExpressionEvaluation {
 			return a * b;
 		case '/':
 			if (b == 0)
-            throw new
-            UnsupportedOperationException("Cannot divide by zero");
-        return a / b;
+				return 0;
+			else
+            //throw new
+            //UnsupportedOperationException("Cannot divide by zero");
+				return a / b;
 		case '%':
 			return a%b;
 		case '^':

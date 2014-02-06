@@ -22,34 +22,32 @@ public class SimulationExperiment2 extends Activity {
 	}
 	public void editExpression(View v){
 			Log.i("Click", "Click");
+			String ScrCurrent = Scr.getText().toString();
 			switch(v.getId()){
 			case R.id.btnC:	 //clear screen
 				Scr.setText("0");
 				break;
 				
 			case R.id.btnPlusMinus:
-				String ScrCrntPlusMinus = Scr.getText().toString();
-				ScrCrntPlusMinus = "-(" + ScrCrntPlusMinus + ")";
-				Scr.setText(ScrCrntPlusMinus);
+				
+				ScrCurrent = "-(" + ScrCurrent + ")";
+				Scr.setText(ScrCurrent);
 				break;
 		
 			case R.id.btnOneByX:
-				String ScrCrntByX = Scr.getText().toString();
-				ScrCrntByX = "1/(" + ScrCrntByX + ")";
-				Scr.setText(ScrCrntByX);
+				ScrCurrent = "1/(" + ScrCurrent + ")";
+				Scr.setText(ScrCurrent);
 				break;
 			
 			case R.id.BtnBackspace:
-				String ScrCrntBackspace = Scr.getText().toString();
-				ScrCrntBackspace = ScrCrntBackspace.substring(0, ScrCrntBackspace.length()-1);
-				Scr.setText(ScrCrntBackspace);
+				ScrCurrent = ScrCurrent.substring(0, ScrCurrent.length()-1);
+				Scr.setText(ScrCurrent);
 				break;
 				
 			case R.id.btnEqualTo:
-				String FinalExpression = Scr.getText().toString();
-				if(ExpressionEvaluation.ValidateExpression(FinalExpression))
+				if(ExpressionEvaluation.ValidateExpression(ScrCurrent))
 				{
-					float result = ExpressionEvaluation.CalculateExpression(FinalExpression);
+					float result = ExpressionEvaluation.CalculateExpression(ScrCurrent);
 					Scr.setText(String.valueOf(result));
 				}
 				else
@@ -58,7 +56,6 @@ public class SimulationExperiment2 extends Activity {
 			
 			default:
 				String numb = ((Button) v).getText().toString();
-				String ScrCurrent = Scr.getText().toString();
 				ScrCurrent += numb;
 				Scr.setText(ScrCurrent);
 				break;
