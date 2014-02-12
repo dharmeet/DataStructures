@@ -4,11 +4,79 @@ import java.util.Stack;
 
 import android.util.Log;
 
+/**
+ * 
+ * 
+ *
+ */
+
+/**
+ * @author Dharmeet
+ * Class to validate and evaluate Expression, according to following regular expression
+ * E --> E + T | E-T | T
+ * T --> T * F | T/F | F
+ * F --> (E) | n
+ * E - Expression, T - Term and F - Factor
+ */
+
 public class ExpressionEvaluation {
 	
 	static Stack<Float> sValues = new Stack<Float>();
 	
+	String mExpr;
+	
 	static Stack<Character> sOps = new Stack<Character>();
+	
+	public float evalExpr() {
+		
+		float mTermValue=evalTerm();
+		
+		return mTermValue;
+	}
+	
+	public float evalTerm() {
+		float factor=0;
+		return factor;
+	}
+	
+	public float evalFactor() {
+		int i=0;
+		float number = 0;
+		if((this.mExpr.charAt(i)>='0' && this.mExpr.charAt(i)<='9') || this.mExpr.charAt(i)=='.')
+		{
+			while((this.mExpr.charAt(i)>='0' && this.mExpr.charAt(i)<='9') || this.mExpr.charAt(i)=='.')
+				i++;
+			String numb = mExpr.substring(0, i-1);
+			number = Float.parseFloat(numb);
+			this.mExpr = this.mExpr.substring(i);
+			return number;
+		}
+		else if(this.mExpr.charAt(i)=='(')
+		{
+			this.mExpr = this.mExpr.substring(i+1);
+			number = this.evalExpr();
+			if(this.mExpr.charAt(0)==')')
+				return number;
+			
+		}
+		return number;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public static boolean isOperator(char op)
 	{
