@@ -34,16 +34,16 @@ public class ExperimentsList extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		switch(position) {
 		case 0: 
-			classes[position]="Experiment1";
+			classes[position]="expr1.Experiment1";
 			break;
 		case 1:
-			classes[position]="Experiment2";
+			classes[position]="expr2.Experiment2";
 			break;
 		case 2:
-			classes[position]="Experiment3";
+			classes[position]="expr3.Experiment3";
 			break;
 		case 3:
-			classes[position]="Experiment4";
+			classes[position]="expr4.Experiment4";
 			break;
 		case 4:
 			classes[position]="Experiment5";
@@ -66,7 +66,7 @@ public class ExperimentsList extends ListActivity {
 		
 		try{
 		
-			Class ourClass = Class.forName("com.cse01.ds." + menuItem);
+			Class ourClass = Class.forName("edu.vlabs.ds." + menuItem);
 			Intent ourIntent = new Intent(ExperimentsList.this, ourClass);
 			startActivity(ourIntent);
 		

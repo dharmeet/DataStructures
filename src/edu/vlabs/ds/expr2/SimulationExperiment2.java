@@ -22,6 +22,7 @@ public class SimulationExperiment2 extends Activity {
 			Log.i("Click", "Click");
 			final EditText mInputExpr = (EditText) findViewById(R.id.calcScreen);
 			String mCurrentInput = mInputExpr.getText().toString();
+			Log.i(mCurrentInput, mCurrentInput);
 			switch(v.getId()){
 			case R.id.btnC:	 //clear screen
 				mInputExpr.setText("0");
@@ -44,12 +45,15 @@ public class SimulationExperiment2 extends Activity {
 				
 			case R.id.btnEqualTo:
 				if(ExpressionEvaluation.ValidateExpression(mCurrentInput))
-				{
-					float result = ExpressionEvaluation.CalculateExpression(mCurrentInput);
+				{	
+					ExpressionEvaluation exprObj = new ExpressionEvaluation(mCurrentInput);
+					float result = exprObj.evalExpr();
+					
+				    //float result = ExpressionEvaluation.CalculateExpression(mCurrentInput);
 					mInputExpr.setText(String.valueOf(result));
 				}
 				else
-					mInputExpr.setText("Invalid Expression");
+				    mInputExpr.setText("Invalid Expression");
 				break;
 			
 			default:

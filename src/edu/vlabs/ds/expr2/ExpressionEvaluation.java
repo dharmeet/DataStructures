@@ -5,12 +5,6 @@ import java.util.Stack;
 import android.util.Log;
 
 /**
- * 
- * 
- *
- */
-
-/**
  * @author Dharmeet
  * Class to validate and evaluate Expression, according to following regular expression
  * E --> E + T | E-T | T
@@ -23,32 +17,72 @@ public class ExpressionEvaluation {
 	
 	static Stack<Float> sValues = new Stack<Float>();
 	
-	String mExpr;
+	public String mExpr;
 	
 	static Stack<Character> sOps = new Stack<Character>();
 	
+	ExpressionEvaluation(String mExpr)
+	{
+		this.mExpr = mExpr;
+		
+	}
+	
 	public float evalExpr() {
-		
-		float mTermValue=evalTerm();
-		
-		return mTermValue;
+		float mTermValue=this.evalTerm();
+		if(this.mExpr.length()>0)
+		    Log.i(this.mExpr, this.mExpr);
+		if(this.mExpr.length()>0 && this.mExpr.charAt(0)=='+')
+		{
+			this.mExpr = this.mExpr.substring(1);
+			Log.i(this.mExpr, this.mExpr);
+			return this.evalExpr() + mTermValue;
+		}
+		else if(this.mExpr.length()>0 && this.mExpr.charAt(0)=='-')
+		{
+			this.mExpr = this.mExpr.substring(1);
+			return this.evalExpr() - mTermValue;
+		}
+		else
+		    return mTermValue;
 	}
 	
 	public float evalTerm() {
-		float factor=0;
-		return factor;
+        float factor=0;
+		factor = this.evalFactor();
+		if(this.mExpr.length()>0 && this.mExpr.charAt(0)=='*')
+		{
+			this.mExpr = this.mExpr.substring(1);
+			return this.evalFactor()*factor; 
+		}
+		else if(this.mExpr.length()>0 && this.mExpr.charAt(0)=='/')
+		{
+			this.mExpr = this.mExpr.substring(1);
+			return this.evalFactor()/factor;
+		}
+		else
+			return factor;
 	}
 	
 	public float evalFactor() {
 		int i=0;
 		float number = 0;
-		if((this.mExpr.charAt(i)>='0' && this.mExpr.charAt(i)<='9') || this.mExpr.charAt(i)=='.')
+		int len = this.mExpr.length();
+		if(i<len && (this.mExpr.charAt(i)>='0' && this.mExpr.charAt(i)<='9') || this.mExpr.charAt(i)=='.')
 		{
-			while((this.mExpr.charAt(i)>='0' && this.mExpr.charAt(i)<='9') || this.mExpr.charAt(i)=='.')
+			while(i<len && (this.mExpr.charAt(i)>='0' && this.mExpr.charAt(i)<='9') || this.mExpr.charAt(i)=='.')
 				i++;
-			String numb = mExpr.substring(0, i-1);
+			if(i==len)
+				i--;
+			String numb = mExpr.substring(0, i);
+			//Log.i(numb, this.mExpr);
 			number = Float.parseFloat(numb);
-			this.mExpr = this.mExpr.substring(i);
+			if(i==len-1)
+				return number;
+			if(i<len)
+			{
+			    this.mExpr = this.mExpr.substring(i);
+			    Log.i(this.mExpr, this.mExpr);
+			}
 			return number;
 		}
 		else if(this.mExpr.charAt(i)=='(')
@@ -56,7 +90,10 @@ public class ExpressionEvaluation {
 			this.mExpr = this.mExpr.substring(i+1);
 			number = this.evalExpr();
 			if(this.mExpr.charAt(0)==')')
+			{
+				this.mExpr = this.mExpr.substring(1);
 				return number;
+			}
 			
 		}
 		return number;
