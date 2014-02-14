@@ -44,16 +44,12 @@ public class SimulationExperiment2 extends Activity {
 				break;
 				
 			case R.id.btnEqualTo:
-				if(ExpressionEvaluation.ValidateExpression(mCurrentInput))
-				{	
 					ExpressionEvaluation exprObj = new ExpressionEvaluation(mCurrentInput);
 					float result = exprObj.evalExpr();
-					
-				    //float result = ExpressionEvaluation.CalculateExpression(mCurrentInput);
-					mInputExpr.setText(String.valueOf(result));
-				}
-				else
-				    mInputExpr.setText("Invalid Expression");
+					if(result==Float.MIN_VALUE)
+						mInputExpr.setText(exprObj.mExpr);
+					else
+					    mInputExpr.setText(String.valueOf(result));
 				break;
 			
 			default:
