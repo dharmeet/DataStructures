@@ -1,5 +1,7 @@
 package edu.vlabs.ds.expr2;
 
+import java.io.IOException;
+
 import edu.vlabs.ds.mainactivity.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -44,16 +46,24 @@ public class SimulationExperiment2 extends Activity {
 				break;
 				
 			case R.id.btnEqualTo:
-					ExpressionEvaluation exprObj = new ExpressionEvaluation(mCurrentInput);
-					float result = exprObj.evalExpr();
-					if(result==Float.MIN_VALUE)
-						mInputExpr.setText(exprObj.mExpr);
-					else
-					    mInputExpr.setText(String.valueOf(result));
+				ExpressionEvaluation exprObj = new ExpressionEvaluation(mCurrentInput);
+				try {
+				     float result = exprObj.evalExpr();
+					 mInputExpr.setText(String.valueOf(result));
+				 } catch (IOException i) {
+					//if(result==Float.MIN_VALUE)
+					//if(exprObj.mExpr!="")
+						mInputExpr.setText("Invalid Expression" + exprObj.mExpr);
+					//else
+					  //  mInputExpr.setText(String.valueOf(result));
+				 }
 				break;
 			
 			default:
-				mCurrentInput += ((Button) v).getText().toString();
+				if(mCurrentInput.equals("0"))
+					mCurrentInput = ((Button) v).getText().toString();
+				else
+				    mCurrentInput += ((Button) v).getText().toString();
 				mInputExpr.setText(mCurrentInput);
 				break;
 		
