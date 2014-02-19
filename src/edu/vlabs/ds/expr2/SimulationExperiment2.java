@@ -49,13 +49,15 @@ public class SimulationExperiment2 extends Activity {
 				ExpressionEvaluation exprObj = new ExpressionEvaluation(mCurrentInput);
 				try {
 				     float result = exprObj.evalExpr();
-					 mInputExpr.setText(String.valueOf(result));
+				     if(exprObj.mExpr.length()==0)
+					     mInputExpr.setText(String.valueOf(result));
+				     else 
+				    	 mInputExpr.setText("Invalid Expression1" + exprObj.mExpr);
 				 } catch (IOException i) {
-					//if(result==Float.MIN_VALUE)
-					//if(exprObj.mExpr!="")
-						mInputExpr.setText("Invalid Expression" + exprObj.mExpr);
-					//else
-					  //  mInputExpr.setText(String.valueOf(result));
+						mInputExpr.setText("Invalid Expression2" + exprObj.mExpr);
+				 } catch (StringIndexOutOfBoundsException e) {
+					    // if string is missing closing brackets or numbers after operators
+					    mInputExpr.setText("Incomplete Expression");
 				 }
 				break;
 			
