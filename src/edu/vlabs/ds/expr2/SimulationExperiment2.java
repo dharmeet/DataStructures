@@ -4,7 +4,11 @@ import java.io.IOException;
 
 import edu.vlabs.ds.mainactivity.R;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -51,10 +55,17 @@ public class SimulationExperiment2 extends Activity {
 				     float result = exprObj.evalExpr();
 				     if(exprObj.mExpr.length()==0)
 					     mInputExpr.setText(String.valueOf(result));
-				     else 
-				    	 mInputExpr.setText("Invalid Expression1" + exprObj.mExpr);
+				     else {
+				    	 int mStartInvalid = mCurrentInput.indexOf(exprObj.mExpr);
+				    	 Spannable mInvalidPart = new SpannableString(mCurrentInput);
+				    	 mInvalidPart.setSpan(new ForegroundColorSpan(Color.RED), mStartInvalid, mCurrentInput.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				       	 mInputExpr.setText(mInvalidPart);
+				     }
 				 } catch (IOException i) {
-						mInputExpr.setText("Invalid Expression2" + exprObj.mExpr);
+					 int mStartInvalid = mCurrentInput.indexOf(exprObj.mExpr);
+			    	 Spannable mInvalidPart = new SpannableString(mCurrentInput);
+			    	 mInvalidPart.setSpan(new ForegroundColorSpan(Color.RED), mStartInvalid, mCurrentInput.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			       	 mInputExpr.setText(mInvalidPart); 
 				 } catch (StringIndexOutOfBoundsException e) {
 					    // if string is missing closing brackets or numbers after operators
 					    mInputExpr.setText("Incomplete Expression");

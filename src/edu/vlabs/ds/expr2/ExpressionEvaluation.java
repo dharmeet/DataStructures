@@ -22,7 +22,19 @@ public class ExpressionEvaluation extends IOException {
 	 */
 	private static final long serialVersionUID = 1L;
 	public String mExpr;
-		
+	
+	int mAdd = '+';
+	int mSub = '-';
+	int mMul = '*';
+	int mDiv = '/';
+	int mExp = '^';
+	int mMod = '%';
+ 	int mZero = '0';
+ 	int mNine = '9';
+ 	int mOpBrckt = '(';
+ 	int mClBrckt = ')';
+ 	int mDot = '.';
+ 	
 	ExpressionEvaluation(String mExpr) {
         this.mExpr = mExpr;
     }
@@ -32,7 +44,7 @@ public class ExpressionEvaluation extends IOException {
     	Log.i("Entering evalExpr() with expression", this.mExpr);
     	float mTermValue=this.evalTerm();
 		    	
-    	if (this.mExpr.length() > 0  &&  this.mExpr.charAt(0) == '+') {
+    	if (this.mExpr.length() > 0  &&  this.mExpr.charAt(0) == mAdd) {
 			
     		this.mExpr = this.mExpr.substring(1);
 						
@@ -53,7 +65,7 @@ public class ExpressionEvaluation extends IOException {
 			else */
 				return mTermValue;
 		}
-		else if (this.mExpr.length() > 0  &&  this.mExpr.charAt(0) == '-') {
+		else if (this.mExpr.length() > 0  &&  this.mExpr.charAt(0) == mSub) {
 			
 			this.mExpr = this.mExpr.substring(1);
 						
@@ -61,12 +73,12 @@ public class ExpressionEvaluation extends IOException {
 			
 			if (this.mExpr.length() > 0) {   // for expression like a*b - c + d*e
 				
-				if (this.mExpr.charAt(0)=='-') {
+				if (this.mExpr.charAt(0) == mSub) {
 					this.mExpr = this.mExpr.substring(1);
 					return mTermValue - this.evalExpr();
 				}
 				
-				else if (this.mExpr.charAt(0)=='+') {
+				else if (this.mExpr.charAt(0) == mAdd) {
 					this.mExpr = this.mExpr.substring(1);
 					return mTermValue + this.evalExpr();
 				}
@@ -76,8 +88,7 @@ public class ExpressionEvaluation extends IOException {
 		}
 		//else if (this.mExpr.length() > 0)
 			//throw new IOException(this.mExpr);
-			
-        return mTermValue;
+		return mTermValue;
 	}
 	
 	public float evalTerm() throws IOException {
@@ -87,24 +98,24 @@ public class ExpressionEvaluation extends IOException {
 		
 		if (this.mExpr.length() > 0) {
 			
-		    if (this.mExpr.charAt(0) == '*') {
+		    if (this.mExpr.charAt(0) == mMul) {
 			this.mExpr = this.mExpr.substring(1);
 			mFactor = mFactor * this.evalTerm();
 			return this.evalHPTerm(mFactor);   
 		    }
 		
-		    else if (this.mExpr.charAt(0) == '/') {
+		    else if (this.mExpr.charAt(0) == mDiv) {
 			this.mExpr = this.mExpr.substring(1);
 			return mFactor / this.evalTerm();
 		    }
 		
-		    else if (this.mExpr.charAt(0) == '%') {
+		    else if (this.mExpr.charAt(0) == mMod) {
 			this.mExpr = this.mExpr.substring(1);
 			mFactor = mFactor % this.evalFactor();
 			return this.evalHPTerm(mFactor);
 		    }
 				
-		    else if (this.mExpr.charAt(0) == '^') {
+		    else if (this.mExpr.charAt(0) == mExp) {
 			this.mExpr = this.mExpr.substring(1);
 			// for expression of type a^b*c we should first calculate a^b
 			mFactor = (float) Math.pow((double)mFactor, (double)this.evalFactor());
@@ -121,20 +132,20 @@ public class ExpressionEvaluation extends IOException {
 		Log.i("Entering evalHPTerm() with expression", this.mExpr);
 		
 		if (this.mExpr.length() > 0) {
-			if (this.mExpr.charAt(0) == '+') {
+			if (this.mExpr.charAt(0) == mAdd) {
 				this.mExpr = this.mExpr.substring(1);
 				return mFactor + this.evalExpr();
 			}
-			else if (this.mExpr.charAt(0) == '-') {
+			else if (this.mExpr.charAt(0) == mSub) {
 				this.mExpr = this.mExpr.substring(1);
 				mFactor = mFactor + (-1)*this.evalTerm();
 				if (this.mExpr.length() > 0)
 				{
-					if (this.mExpr.charAt(0) == '+') {
+					if (this.mExpr.charAt(0) == mAdd) {
 						this.mExpr = this.mExpr.substring(1);
 						return mFactor + this.evalExpr();
 					}
-					else if (this.mExpr.charAt(0) == '-') {
+					else if (this.mExpr.charAt(0) == mSub) {
 						this.mExpr = this.mExpr.substring(1);
 						return mFactor - this.evalExpr();
 					}
@@ -142,20 +153,20 @@ public class ExpressionEvaluation extends IOException {
 				else
 					return mFactor;
 			}
-			else if (this.mExpr.charAt(0) == '*') {
+			else if (this.mExpr.charAt(0) == mMul) {
 				this.mExpr = this.mExpr.substring(1);
 				return mFactor * this.evalTerm();
 			}
-			else if (this.mExpr.charAt(0) == '/') {
+			else if (this.mExpr.charAt(0) == mDiv) {
 				this.mExpr = this.mExpr.substring(1);
 				return mFactor / this.evalTerm();
 			}
-			else if (this.mExpr.charAt(0) == '%') {
+			else if (this.mExpr.charAt(0) == mMod) {
 				this.mExpr = this.mExpr.substring(1);
 				mFactor = mFactor % this.evalFactor();
 				return this.evalHPTerm(mFactor);
 			}
-			else if (this.mExpr.charAt(0) == '^') {
+			else if (this.mExpr.charAt(0) == mExp) {
 				this.mExpr = this.mExpr.substring(1);
 				mFactor = (float) Math.pow((double) mFactor, (double) this.evalFactor());
 				return this.evalHPTerm(mFactor);
@@ -172,7 +183,7 @@ public class ExpressionEvaluation extends IOException {
 		String numb = "";
 		float mNumber = Float.MIN_VALUE;
 		if (this.mExpr.length() > 0) {
-			if ((this.mExpr.charAt(0) >= '0'  &&  this.mExpr.charAt(0) <= '9')  ||  this.mExpr.charAt(0) == '.') {
+			if ((this.mExpr.charAt(0) >= mZero  &&  this.mExpr.charAt(0) <= mNine)  ||  this.mExpr.charAt(0) == mDot) {
 			    Pattern pNumber = Pattern.compile("[0-9]*\\.?[0-9]+");
 			    Matcher mNumb = pNumber.matcher(this.mExpr);
 			    if (mNumb.find()) {
@@ -187,11 +198,11 @@ public class ExpressionEvaluation extends IOException {
 			    }
 			    return mNumber;
 		    }
-		    else if (this.mExpr.charAt(0) == '(') {
+		    else if (this.mExpr.charAt(0) == mOpBrckt) {
 			    this.mExpr = this.mExpr.substring(1);
 			    mNumber = this.evalExpr();
 			
-			    if (this.mExpr.charAt(0) == ')') {
+			    if (this.mExpr.charAt(0) == mClBrckt) {
 				    this.mExpr = this.mExpr.substring(1);
 				    Log.i("evalFactor", this.mExpr);
 				    return mNumber;
