@@ -106,12 +106,18 @@ public class ExpressionEvaluation extends IOException {
 		
 		    else if (this.mExpr.charAt(0) == mDiv) {
 			this.mExpr = this.mExpr.substring(1);
-			return mFactor / this.evalTerm();
+			float mDivisor = this.evalTerm();
+			if (mDivisor == 0)
+				throw new ArithmeticException();
+			return mFactor / mDivisor;
 		    }
 		
 		    else if (this.mExpr.charAt(0) == mMod) {
 			this.mExpr = this.mExpr.substring(1);
-			mFactor = mFactor % this.evalFactor();
+			float mDivisor = this.evalFactor();
+			if (mDivisor == 0)
+				throw new ArithmeticException();
+			mFactor = mFactor % mDivisor;
 			return this.evalHPTerm(mFactor);
 		    }
 				
@@ -159,11 +165,17 @@ public class ExpressionEvaluation extends IOException {
 			}
 			else if (this.mExpr.charAt(0) == mDiv) {
 				this.mExpr = this.mExpr.substring(1);
-				return mFactor / this.evalTerm();
+				float mDivisor = this.evalTerm();
+				if (mDivisor == 0)
+					throw new ArithmeticException();
+				return mFactor / mDivisor;
 			}
 			else if (this.mExpr.charAt(0) == mMod) {
 				this.mExpr = this.mExpr.substring(1);
-				mFactor = mFactor % this.evalFactor();
+				float mDivisor = this.evalFactor();
+				if (mDivisor == 0)
+					throw new ArithmeticException();
+				mFactor = mFactor % mDivisor;
 				return this.evalHPTerm(mFactor);
 			}
 			else if (this.mExpr.charAt(0) == mExp) {

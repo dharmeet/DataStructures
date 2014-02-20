@@ -66,6 +66,8 @@ public class SimulationExperiment2 extends Activity {
 			    	 Spannable mInvalidPart = new SpannableString(mCurrentInput);
 			    	 mInvalidPart.setSpan(new ForegroundColorSpan(Color.RED), mStartInvalid, mCurrentInput.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			       	 mInputExpr.setText(mInvalidPart); 
+				 } catch (ArithmeticException ae) {
+					 mInputExpr.setText("NaN"); 
 				 } catch (StringIndexOutOfBoundsException e) {
 					    // if string is missing closing brackets or numbers after operators
 					    mInputExpr.setText("Incomplete Expression");
