@@ -39,6 +39,13 @@ public class ExpressionEvaluation extends IOException {
         this.mExpr = mExpr;
     }
 	
+	/**
+	 * Function to calculate Expression following
+	 * E ---> E + T | E - T | T
+	 * @return
+	 * @throws IOException
+	 */
+	
     public float evalExpr() throws IOException {
     	
     	Log.i("Entering evalExpr() with expression", this.mExpr);
@@ -91,6 +98,13 @@ public class ExpressionEvaluation extends IOException {
 		return mTermValue;
 	}
 	
+    /**
+     * Function to evaluate term following 
+     * T -> T*F | T/F | T^F | T%F | F
+     * @return
+     * @throws IOException
+     */
+    
 	public float evalTerm() throws IOException {
         
 		Log.i("Entering evalTerm() with expression", this.mExpr);
@@ -131,8 +145,12 @@ public class ExpressionEvaluation extends IOException {
 		return mFactor;
 	}
 	
-	//Function to take care of expressions of type a^b*c or a%b*c 
-	//where a^b and a%b are calculated and passed as argument
+	/**
+	 * Function to take care of expressions of type a^b*c or a%b*c 
+	 * where a^b and a%b are calculated and passed as argument
+	 * 
+	 */
+	
 	public float evalHPTerm (float mFactor) throws IOException {
 		
 		Log.i("Entering evalHPTerm() with expression", this.mExpr);
@@ -188,6 +206,13 @@ public class ExpressionEvaluation extends IOException {
 		}
 		return mFactor;
 	}
+	
+	/**
+	 * F ---> (E) | N
+	 * @return Number or (Expression)
+	 * @throws IOException in case of invalid input
+	 */
+	
 	
 	public float evalFactor() throws IOException {
 		

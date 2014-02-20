@@ -75,7 +75,7 @@ public class SimulationExperiment2 extends Activity {
 				break;
 			
 			default:
-				if(mCurrentInput.equals("0"))
+				if (mCurrentInput.equals("0"))
 					mCurrentInput = ((Button) v).getText().toString();
 				else
 				    mCurrentInput += ((Button) v).getText().toString();
