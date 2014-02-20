@@ -9,8 +9,8 @@ import android.util.Log;
 /**
  * @author Dharmeet
  * Class to validate and evaluate Expression, according to following regular expression
- * E --> E + T | E-T | T
- * T --> T * F | T/F | F
+ * E --> E + T | E - T | T
+ * T --> T * F | T / F | F
  * F --> (E) | n
  * E - Expression, T - Term and F - Factor
  */
@@ -57,19 +57,19 @@ public class ExpressionEvaluation extends IOException {
 						
 			mTermValue = mTermValue + this.evalExpr();   // for expression like a + b*c
 			
-			/*if (this.mExpr.length() > 0) {
-				if (this.mExpr.charAt(0)=='-') {
+			if (this.mExpr.length() > 0) {
+				if (this.mExpr.charAt(0) == mSub) {
 					this.mExpr = this.mExpr.substring(1);
 					return mTermValue - this.evalExpr(); 
 				}
-				else if (this.mExpr.charAt(0)=='+') {
+				else if (this.mExpr.charAt(0) == mAdd) {
 					this.mExpr = this.mExpr.substring(1);
 					return mTermValue + this.evalExpr();
 				}
-				//else 
-					//throw new IOException(this.mExpr);
+				else if (this.mExpr.charAt(0) != mClBrckt)
+					throw new IOException(this.mExpr);
 			}
-			else */
+			else 
 				return mTermValue;
 		}
 		else if (this.mExpr.length() > 0  &&  this.mExpr.charAt(0) == mSub) {
@@ -93,7 +93,7 @@ public class ExpressionEvaluation extends IOException {
 					//throw new IOException(this.mExpr);
 			}
 		}
-		//else if (this.mExpr.length() > 0)
+		//else if (this.mExpr.length() > 0 && this.mExpr.charAt(0) != mClBrckt)
 			//throw new IOException(this.mExpr);
 		return mTermValue;
 	}
@@ -201,8 +201,8 @@ public class ExpressionEvaluation extends IOException {
 				mFactor = (float) Math.pow((double) mFactor, (double) this.evalFactor());
 				return this.evalHPTerm(mFactor);
 			}
-			//else
-				//throw new IOException(this.mExpr);
+			else if (this.mExpr.charAt(0) != mClBrckt)
+				throw new IOException(this.mExpr);
 		}
 		return mFactor;
 	}
