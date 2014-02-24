@@ -1,5 +1,6 @@
 package edu.vlabs.ds.expr2;
 
+//import edu.vlabs.ds.mainactivity.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,11 +33,12 @@ public class Experiment2 extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		String menuItem = classes[position];
 		try{
-		Class ourClass = Class.forName("edu.vlabs.ds.expr2." + menuItem);
+		//	setContentView(R.layout.activity_introduction2);
+		Class<?> ourClass = Class.forName("edu.vlabs.ds.expr2." + menuItem);
 		Intent ourIntent = new Intent(Experiment2.this, ourClass);
 		startActivity(ourIntent);
 		}catch(ClassNotFoundException e){
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 		}
 }

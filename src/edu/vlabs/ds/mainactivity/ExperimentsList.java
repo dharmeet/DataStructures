@@ -66,7 +66,7 @@ public class ExperimentsList extends ListActivity {
 		
 		try{
 		
-			Class ourClass = Class.forName("edu.vlabs.ds." + menuItem);
+			Class<?> ourClass = Class.forName("edu.vlabs.ds." + menuItem);
 			Intent ourIntent = new Intent(ExperimentsList.this, ourClass);
 			startActivity(ourIntent);
 		
